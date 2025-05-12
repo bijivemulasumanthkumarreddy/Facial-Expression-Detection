@@ -6,10 +6,10 @@ from utils.preprocessing import preprocess_frame
 from anti_spoofing.spoof_check import is_real_face
 from tensorflow.keras.models import model_from_json
 
-with open("emotion_model1.json", "r") as f:
+with open("emotion_model.json", "r") as f:
     model = model_from_json(f.read())
 
-model.load_weights("emotion_model1.h5")
+model.load_weights("emotion_model.h5")
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 st.set_page_config(page_title="Emotion Detection", layout="centered")
