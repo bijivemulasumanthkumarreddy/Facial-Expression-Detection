@@ -10,8 +10,7 @@ st.title("😊 Real-Time Emotion Detection")
 
 @st.cache_resource
 def load_emotion_model():
-    return load_model("/content/emotion_model.h5")
-
+    return load_model(emotion_model.h5)
 model = load_emotion_model()
 labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
