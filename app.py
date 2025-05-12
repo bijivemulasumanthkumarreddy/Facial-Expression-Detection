@@ -6,11 +6,21 @@ from utils.preprocessing import preprocess_frame
 from anti_spoofing.spoof_check import is_real_face
 from tensorflow.keras.models import model_from_json
 
-with open("emotion_model.json", "r") as f:
-    model = model_from_json(f.read())
+import tensorflow as tf
+from tensorflow.keras.models import model_from_json, Sequential  # <-- Explicitly import Sequential
+from tensorflow.keras.optimizers import Adam
 
+# Load the model architecture
+with open("emotion_model.json", "r") as json_file:
+    model_json = json_file.read()
+
+model = model_from_json(model_json)  # now Sequential is known
+
+# Load the weights
 model.load_weights("emotion_model.h5")
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Compile the model
+model.compile(optimizer=Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
 
 st.set_page_config(page_title="Emotion Detection", layout="centered")
 st.title("😊 Real-Time Emotion Detection")
